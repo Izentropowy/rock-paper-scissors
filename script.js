@@ -51,7 +51,7 @@ function playRound(playerSelection, computerSelection){
     return winner;
 }
 
-// create function game() that plays X round game, keeps score and reports a winner
+// create function game() that plays X round game, keeps score and reports a winner; First to "rounds" is a winner
 function game(rounds) {
 
     let playerResult = 0;
