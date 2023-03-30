@@ -7,12 +7,49 @@ function getComputerChoice(){
     let choice = options[randomNumber];
     return choice;
 }
-console.log(getComputerChoice())
+
 // create function that plays round so it takes playerSelection and computerSelection and return a winner in string
 
+function playRound(playerSelection, computerSelection){
 
     // make it case insensitive
 
+    playerSelection = playerSelection.toLowerCase();
+    let winner;
+    if (playerSelection === computerSelection) {
+        winner = "draw";
+        return winner;
+    }
+    if (playerSelection === "rock"){
+        if (computerSelection === "paper"){
+            winner = "computer";
+        }
+        else{
+            winner = "player";
+        }
+    }
+    else if (playerSelection === "paper"){
+        if (computerSelection === "scissors"){
+             winner = "computer";
+        }
+        else{
+             winner = "player";
+        }
+    }
+    else if (playerSelection === "scissors"){
+        if (computerSelection === "rock"){
+            winner = "computer";
+        }
+        else{
+            winner = "player";
+        }
+    }
+    else {
+     winner = "undefined";
+    }
 
+    return winner;
+}
 
-// create function game() that plays 5 round game, keeps score and reports a winner
+// create function game() that plays 5 round game, keeps winner and reports a winner
+
