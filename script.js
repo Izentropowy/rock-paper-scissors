@@ -52,4 +52,45 @@ function playRound(playerSelection, computerSelection){
 }
 
 // create function game() that plays 5 round game, keeps winner and reports a winner
+function game(rounds) {
+    let playerResult = 0;
+    let computerResult = 0;
+    // call playRound "rounds" times
+    for(let i = 0; i < rounds; i++){
 
+        let playerChoice = prompt("Choose Rock, Paper or Scissors: ");
+        let computerChoice = getComputerChoice();
+        let score = playRound(playerChoice, computerChoice);
+
+        if (score === "player"){
+            playerResult++;
+        }
+        else if(score === "computer"){
+            computerResult++;
+        }
+        else if(score === "draw"){
+            rounds++;
+        }
+        else{
+            console.log("Type only 'rock', 'paper' or 'scissors'");
+            rounds++;
+        }
+
+        console.log("Computer chose " + computerChoice);
+        console.log("Player: " + playerResult);
+        console.log("Computer: " + computerResult);
+        console.log("\n");
+    }
+
+    if(playerResult > computerResult){
+        console.log("PLAYER WINS");
+    }
+    else if(playerResult < computerResult){
+        console.log("COMPUTER WINS");
+    }
+    else{
+        console.log("DRAW");
+    }
+}
+
+game(5);
