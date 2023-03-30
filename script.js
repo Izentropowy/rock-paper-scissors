@@ -5,10 +5,9 @@ function getComputerChoice(){
     let options = ["rock", "paper", "scissors"];
     let randomNumber = Math.floor(Math.random() * 3);
     let choice = options[randomNumber];
-    console.log(choice);
+    return choice;
 }
-
-getComputerChoice();
+console.log(getComputerChoice())
 // create function that plays round so it takes playerSelection and computerSelection and return a winner in string
 
 
