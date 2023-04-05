@@ -105,4 +105,18 @@ function game(finalResult) {
         }
 }
 
-game(5);
+// Create a function that will get the result from the user
+// when particular button is clicked
+
+const buttonRock = document.querySelector('#Rock');
+const buttonPaper = document.querySelector('#Paper');
+const buttonScissors = document.querySelector('#Scissors');
+const divResult = document.querySelector('div.results');
+
+buttonRock.addEventListener('click', function(e){
+    divResult.textContent += 'Rock';
+})
+
+
+
+
