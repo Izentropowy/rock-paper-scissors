@@ -1,4 +1,9 @@
 
+const buttonRock = document.querySelector('#rock');
+const buttonPaper = document.querySelector('#paper');
+const buttonScissors = document.querySelector('#scissors');
+const divResult = document.querySelector('div.results');
+
 // Create bot that will randomly choose rock, paper or scissors
 
 function getComputerChoice(){
@@ -8,13 +13,10 @@ function getComputerChoice(){
     return choice;
 }
 
-// Create function that plays round so it takes playerSelection and computerSelection and return a winner in string
+// Create function that plays round so it takes playerSelection and computerSelection and returns a winner in string
 
 function playRound(playerSelection, computerSelection){
 
-    // Make it case insensitive
-
-    playerSelection = playerSelection.toLowerCase();
     let winner;
     if (playerSelection === computerSelection) {
         winner = "draw";
@@ -51,72 +53,60 @@ function playRound(playerSelection, computerSelection){
     return winner;
 }
 
-// Create function game() that plays X round game, keeps score and reports a winner; First to "rounds" is a winner
-function game(finalResult) {
+let playerScore = 0;
+let computerScore = 0;
 
-    let playerResult = 0;
-    let computerResult = 0;
-
-    // Call playRound "rounds" times
-    let keepGoing = true;
-    while(keepGoing){
-
-        // Take input from the player
-        let playerChoice = prompt("Choose Rock, Paper or Scissors: ");
-
-        // Take computer's choice
-        let computerChoice = getComputerChoice();
-
-        // Play round
-        let score = playRound(playerChoice, computerChoice);
-
-        // Keep track of scores
-        if (score === "player"){
-            playerResult++;
-        }
-        else if(score === "computer"){
-            computerResult++;
-        }
-
-        // If draw, round is not resolved
-        else if(score === "draw"){
-            console.log("Draw");
-        }
-
-        // Check for input validity
-        else{
-            console.log("Type only 'rock', 'paper' or 'scissors'");
-        }
-        // Display current scores
-        console.log("Computer chose " + computerChoice);
-        console.log("Player: " + playerResult);
-        console.log("Computer: " + computerResult);
-        console.log("\n");
-
-                // Display final result
-        if(playerResult === finalResult){
-            console.log("PLAYER WINS");
-            keepGoing = false;
-        }
-        else if(computerResult === finalResult){
-            console.log("COMPUTER WINS");
-            keepGoing = false;
-        }
-        }
+function updateScore(roundWinner){
+    if (roundWinner === 'player'){
+        playerScore++;
+    }
+    else if (roundWinner === 'computer'){
+        computerScore++;
+    }
+    divResult.textContent += `Player: ${playerScore}
+    Computer: ${computerScore}`;
 }
 
-// Create a function that will get the result from the user
-// when particular button is clicked
+function isOver(playerScore, computerScore){
+    if (playerScore === 5){
+        divResult.textContent = `CONGRATULATIONS, YOU WON!
+        
+        `;
+        return true;
+    }
+    else if (computerScore === 5){
+        divResult.textContent = `YOU LOST
+        
+        `;
+        return true;
+    }
+    return false;
+}
 
-const buttonRock = document.querySelector('#Rock');
-const buttonPaper = document.querySelector('#Paper');
-const buttonScissors = document.querySelector('#Scissors');
-const divResult = document.querySelector('div.results');
+function resetGame(){
+    playerScore = 0;
+    computerScore = 0;
+    divResult.textContent += "Select ROCK, PAPER or SCISSORS";
+}
 
-buttonRock.addEventListener('click', function(e){
-    divResult.textContent += 'Rock';
-})
+function playGame(e){
+    playerChoice = this.id;
+    compChoice = getComputerChoice();
+    roundWinner = playRound(playerChoice, compChoice);
+    divResult.textContent = `You: ${playerChoice}
+    Computer: ${compChoice}
+    
+    `;
+    updateScore(roundWinner);
+    if (isOver(playerScore, computerScore)){
+        resetGame();
+    }
+}
 
+buttonRock.addEventListener('click', playGame);
+buttonPaper.addEventListener('click', playGame);
+buttonScissors.addEventListener('click', playGame);
+ 
 
 
 
