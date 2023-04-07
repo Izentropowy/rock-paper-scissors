@@ -6,7 +6,7 @@ const divResult = document.querySelector('div.results');
 const modal = document.querySelector('.modal');
 const modalBtn = document.querySelector('.modal-btn');
 const modalPara = document.querySelector('.modal-content h1')
-console.log(modalPara);
+const bestOf = 5;
 
 // Create bot that will randomly choose rock, paper or scissors
 
@@ -71,13 +71,13 @@ function updateScore(roundWinner){
 }
 
 function isOver(playerScore, computerScore){
-    if (playerScore === 5){
+    if (playerScore === bestOf){
         divResult.textContent = `CONGRATULATIONS, YOU WON!
         
         `;
         return true;
     }
-    else if (computerScore === 5){
+    else if (computerScore === bestOf){
         divResult.textContent = `YOU LOST
         
         `;
@@ -86,12 +86,17 @@ function isOver(playerScore, computerScore){
     return false;
 }
 
-function resetGame(){
-    playerScore = 0;
-    computerScore = 0;
+function resetGame(winner){
     divResult.textContent = "Select ROCK, PAPER or SCISSORS";
     modal.style.display = "flex";
-
+    if (winner === "player"){
+        modalPara.textContent = `CONGRATULATIONS! YOU WON ${playerScore} - ${computerScore}`
+    }
+    else{
+        modalPara.textContent = `YOU LOST ${playerScore} - ${computerScore}`
+    }
+    playerScore = 0;
+    computerScore = 0;
 }
 
 function playGame(e){
@@ -104,7 +109,14 @@ function playGame(e){
     `;
     updateScore(roundWinner);
     if (isOver(playerScore, computerScore)){
-        resetGame();
+        let winner;
+        if (playerScore === bestOf){
+            winner = "player";
+        }
+        else {
+            winner = "computer";
+        }
+        resetGame(winner);
     }
 }
 
