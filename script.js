@@ -3,6 +3,10 @@ const buttonRock = document.querySelector('#rock');
 const buttonPaper = document.querySelector('#paper');
 const buttonScissors = document.querySelector('#scissors');
 const divResult = document.querySelector('div.results');
+const modal = document.querySelector('.modal');
+const modalBtn = document.querySelector('.modal-btn');
+const modalPara = document.querySelector('.modal-content h1')
+console.log(modalPara);
 
 // Create bot that will randomly choose rock, paper or scissors
 
@@ -63,8 +67,7 @@ function updateScore(roundWinner){
     else if (roundWinner === 'computer'){
         computerScore++;
     }
-    divResult.textContent += `Player: ${playerScore}
-    Computer: ${computerScore}`;
+    divResult.textContent += `Player ${playerScore} - ${computerScore} Computer`;
 }
 
 function isOver(playerScore, computerScore){
@@ -86,7 +89,9 @@ function isOver(playerScore, computerScore){
 function resetGame(){
     playerScore = 0;
     computerScore = 0;
-    divResult.textContent += "Select ROCK, PAPER or SCISSORS";
+    divResult.textContent = "Select ROCK, PAPER or SCISSORS";
+    modal.style.display = "flex";
+
 }
 
 function playGame(e){
@@ -106,6 +111,9 @@ function playGame(e){
 buttonRock.addEventListener('click', playGame);
 buttonPaper.addEventListener('click', playGame);
 buttonScissors.addEventListener('click', playGame);
+modalBtn.addEventListener('click', function(e){
+    modal.style.display = "none";
+})
  
 
 
